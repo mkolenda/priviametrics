@@ -19,3 +19,11 @@ doc/
 .idea
 .secret
 .keep
+
+# Test files
+app/views/events/_event.html.erb
+app/views/events/create.js.erb
+app/views/events/index.html.erb
+public/assets/test.js
+public/test.html
+
