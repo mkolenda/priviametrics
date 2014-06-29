@@ -11,18 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626021838) do
+ActiveRecord::Schema.define(version: 20140628185005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "domains", force: true do |t|
+    t.string "name", null: false
+  end
+
   create_table "events", force: true do |t|
     t.string   "name"
     t.string   "referrer"
-    t.string   "property_1"
-    t.string   "property_2"
+    t.decimal  "property_1", precision: 15, scale: 5
+    t.decimal  "property_2", precision: 15, scale: 5
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "domain_id",                           null: false
   end
+
+  add_index "events", ["domain_id"], name: "index_events_on_domain_id", using: :btree
 
 end

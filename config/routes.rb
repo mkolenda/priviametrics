@@ -4,6 +4,8 @@ Metrics::Application.routes.draw do
   # Map the CORS preflight request to events#index
   match 'events' => "events#index", via: :options
 
+  get 'charts' => "charts#index"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

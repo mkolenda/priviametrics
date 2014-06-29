@@ -1,0 +1,7 @@
+<% content_for :javascript_includes do %>
+    <%= javascript_include_tag "charts.js" %>
+<% end %>
+
+<b>Chart</b>
+
+<%= content_tag :div, '', id: 'chart', data: {events: events_chart_data} %>
