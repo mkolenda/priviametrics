@@ -4,13 +4,21 @@
   <title>Metrics</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "/assets/priviametrics" %>
   <%= yield :javascript_includes %>
 
 </head>
 <body>
+    <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+    <% end %>
 
-<%= yield %>
+    <div id="user_info">
+      <% if user_signed_in? %>
+        <span>Hello <%= current_user.email %> Not you? <%= link_to "Logout", destroy_user_session_path, method: :delete %></span>
+      <% else %>
+      <% end %>
+    </div>
 
+    <%= yield %>
 </body>
 </html>

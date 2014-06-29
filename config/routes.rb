@@ -1,10 +1,13 @@
 Metrics::Application.routes.draw do
+  devise_for :users
   resources :events, only: [:index, :create, :show]
 
   # Map the CORS preflight request to events#index
   match 'events' => "events#index", via: :options
 
   get 'charts' => "charts#index"
+
+  root to: "charts#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
