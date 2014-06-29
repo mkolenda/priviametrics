@@ -14,6 +14,8 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 gem 'railties'
 
+gem 'devise', '~> 3.2.4'
+
 group :development, :test do
   gem 'factory_girl_rails', '4.2.0'
   gem 'rspec-rails', '2.13.1'
