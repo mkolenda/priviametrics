@@ -74,8 +74,29 @@ describe Event do
 
   describe "::by_day" do
     before do
+      (Date.today - 2..Date.today).each do |day|
+        %w{Sale Click}.each do |name|
+          %w{http://www.bloogle.com http://www.blueocean.com}.each do |referrer|
+            2.times do
+              Event.create(name: name,
+                           referrer: referrer,
+                           property_1: 100,
+                           property_2: 200,
+                           created_at: day
+              )
+            end
+          end
+        end
+      end
+    end
 
-
+    it "should generate a hash with the correct keys and values" do
+      data = Event.by_day(Date.today - 2, Date.today)
+      data.length.should eq 12
+      data.each do |event|
+        event.total_1.should eq 200
+        event.total_2.should eq 400
+      end
     end
   end
 end
