@@ -12,11 +12,17 @@ describe Domain do
   it { should respond_to(:users) }
   it { should respond_to(:user_domains)}
   it { should validate_uniqueness_of(:name) }
-  it { should validate_presence_of(:name) }
 
   describe "correct values" do
     it "should report the correct values" do
       domain.name.should eq "www.cruftify.com"
+    end
+  end
+
+  describe "incorrect values" do
+    it "should be invalid" do
+      domain.name = "some-bad-domain.bad"
+      domain.should_not be_valid
     end
   end
 

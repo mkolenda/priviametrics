@@ -1,0 +1,6 @@
+<tr>
+    <td><%= domain.id %></td>
+    <td><%= domain.name %></td>
+    <td><%= domain.users.count %></td>
+    <td><%= link_to 'Change users', edit_domain_path(domain) %></td>
+</tr>

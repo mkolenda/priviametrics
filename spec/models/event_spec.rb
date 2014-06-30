@@ -27,6 +27,13 @@ describe Event do
     end
   end
 
+  describe "bad referrer url" do
+    it "should be invalid" do
+      event.referrer = "htp//www.cruftify.com"
+      event.should be_invalid
+    end
+  end
+
   describe "associated domains" do
     it "should create a new domain record when the referrer has an new domain" do
       expect{ no_domain.save }.to change(Domain, :count)

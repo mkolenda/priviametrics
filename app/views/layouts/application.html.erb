@@ -8,9 +8,11 @@
 
 </head>
 <body>
-    <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
-    <% end %>
+    <div id="alerts">
+        <% flash.each do |key, value| %>
+            <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+        <% end %>
+    </div>
 
     <div id="user_info">
       <% if user_signed_in? %>

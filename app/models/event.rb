@@ -1,12 +1,3 @@
-class DomainValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    unless (value =~ /\A(http|https):\/\/([a-z0-9\-\.]+\.(com|org|net|mil|edu))/i) ||
-           (value =~ /\A(http|https):\/\/(localhost:\d*)/i)
-      record.errors[attribute] << (options[:message] || "is not a domain")
-    end
-  end
-end
-
 class Event < ActiveRecord::Base
   belongs_to :domain
   has_many :user_domains, through: :domain #
@@ -15,7 +6,7 @@ class Event < ActiveRecord::Base
   validates :referrer,
               allow_blank: false,
               allow_nil: false,
-              domain: true
+              referrer: true
 
   before_create :get_domain
 

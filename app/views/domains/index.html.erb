@@ -1,4 +1,4 @@
-<table class="table table-condensed table-striped table-hover sites">
+<table id="domains" class="table table-condensed table-striped table-hover sites">
   <thead>
   <tr>
     <th>ID</th>
@@ -14,9 +14,15 @@
         <td><%= domain.id %></td>
         <td><%= domain.name %></td>
         <td><%= domain.users.count %></td>
-        <td><%= link_to 'Click to change', edit_domain_path(domain) %></td>
+        <td><%= link_to 'Change users', edit_domain_path(domain) %></td>
       </tr>
   <% end %>
 
   </tbody>
 </table>
+
+<%= form_for(@domain, remote: true) do |f| %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    <%= f.submit %>
+<% end %>
