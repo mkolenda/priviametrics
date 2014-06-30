@@ -1,6 +1,7 @@
 Metrics::Application.routes.draw do
   devise_for :users
   resources :events, only: [:index, :create, :show]
+  resources :domains
 
   # Map the CORS preflight request to events#index
   match 'events' => "events#index", via: :options

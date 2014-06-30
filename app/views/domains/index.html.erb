@@ -1,0 +1,22 @@
+<table class="table table-condensed table-striped table-hover sites">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Domain Name</th>
+    <th>User Count</th>
+    <th>Associated Users</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @domains.each do |domain| %>
+      <tr>
+        <td><%= domain.id %></td>
+        <td><%= domain.name %></td>
+        <td><%= domain.users.count %></td>
+        <td><%= link_to 'Click to change', edit_domain_path(domain) %></td>
+      </tr>
+  <% end %>
+
+  </tbody>
+</table>

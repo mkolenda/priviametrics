@@ -3,6 +3,11 @@ FactoryGirl.define do
   factory :user do
     email                  "user@example.com"
     password               "password"
+
+    factory :admin do
+      admin                 true
+      email                 "user@example.com"
+    end
   end
 
   factory :event do
