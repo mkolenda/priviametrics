@@ -20,3 +20,9 @@
     end
   end
 end
+
+user = User.create(email: 'user@test.com', password: 'password')
+
+Domain.all.each do |domain|
+  UserDomain.create(domain: domain, user: user)
+end

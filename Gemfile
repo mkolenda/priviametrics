@@ -17,7 +17,6 @@ gem 'railties'
 gem 'devise', '~> 3.2.4'
 
 group :development, :test do
-  gem 'factory_girl_rails', '4.2.0'
   gem 'rspec-rails', '2.13.1'
   gem 'guard-rspec', '2.5.0'
   gem 'rspec-mocks'
@@ -29,15 +28,12 @@ group :development, :test do
 end
 
 group :test do
+  gem 'factory_girl_rails', '4.2.0'
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
   gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
   gem "shoulda", "~> 3.5.0"
-end
-
-group :doc do
-  gem 'sdoc', '0.3.20', require: false
 end
 
 group :production do

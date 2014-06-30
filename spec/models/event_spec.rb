@@ -1,29 +1,10 @@
 require 'spec_helper'
 
 describe Event do
-  let(:domain) {
-    Domain.new(
-        name: "www.cruftify.com"
-    )
-  }
-
-  let(:event) {
-    Event.new(
-      name: "an event",
-      referrer: "http://www.cruftify.com",
-      property_1: 100,
-      property_2: 200
-    )
-  }
-
-  let(:no_domain) {
-    Event.new(
-        name: "que te quedes decir",
-        referrer: "http://some-unknown-domain.com",
-        property_1: 100,
-        property_2: 200
-    )
-  }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:domain) { FactoryGirl.build(:domain) }
+  let(:event) { FactoryGirl.build(:event, name: 'an event', referrer: 'http://www.cruftify.com') }
+  let(:no_domain) { FactoryGirl.build(:event, name: "no domain", referrer: "http://some-unknown-domain.com/here/you/go") }
 
   subject { event }
 
@@ -88,10 +69,14 @@ describe Event do
           end
         end
       end
+
+      Domain.all.each do |domain|
+        UserDomain.create(domain: domain, user: user)
+      end
     end
 
     it "should generate a hash with the correct keys and values" do
-      data = Event.by_day(Date.today - 2, Date.today)
+      data = Event.by_day(Date.today - 2, Date.today, user)
       data.length.should eq 12
       data.each do |event|
         event.total_1.should eq 200

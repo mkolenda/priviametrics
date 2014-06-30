@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe EventsHelper do
+  let(:user) { FactoryGirl.create(:user) }
+
+  before do
+    ApplicationController.any_instance.stub(:current_user).and_return(user)
+  end
+
   describe "#events_chart_data" do
     before do
       (Date.today - 2..Date.today).each do |day|
@@ -17,11 +23,14 @@ describe EventsHelper do
           end
         end
       end
+
+      Domain.all.each do |domain|
+        UserDomain.create(domain: domain, user: user)
+      end
     end
 
     it "should generate an array of hashes appropriate for the chart javascript to consume" do
-      # events_chart_data(start_date = 30.days.ago, end_date = Time.zone.now)
-      data = events_chart_data(Date.today - 2, Date.today)
+      data = events_chart_data(Date.today - 2, Date.today, user)
       data.length.should eq 12
 
       data.each do |h|

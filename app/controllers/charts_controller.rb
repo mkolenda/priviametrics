@@ -6,10 +6,8 @@ class ChartsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @events = Event.all
-    @domains = Domain.order(:name)
-    @event_names = Event.get_names_for_user
+    @domains = current_user.domains
+    @event_names = current_user.events.map { |event | event.name.downcase }.uniq
   end
-
 
 end

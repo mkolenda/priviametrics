@@ -1,11 +1,7 @@
 require 'spec_helper'
 
 describe Domain do
-  let(:domain) {
-    Domain.new(
-        name: "www.cruftify.com"
-    )
-  }
+  let(:domain) { FactoryGirl.create(:domain, name: 'www.cruftify.com') }
 
   subject { domain }
 
@@ -13,6 +9,7 @@ describe Domain do
 
   it { should respond_to(:name) }
   it { should respond_to(:events) }
+  it { should respond_to((:users))}
 
   describe "correct values" do
     it "should report the correct values" do
@@ -31,5 +28,4 @@ describe Domain do
       domain.should_not be_valid
     end
   end
-
 end
