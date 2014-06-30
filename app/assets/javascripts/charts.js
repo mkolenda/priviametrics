@@ -38,7 +38,27 @@ $(document).ready(function() {
 
     //
     // Select the data matching from the chart-data div and apply it to the chart itself
-    var redrawChart = function() {
+    var redrawChart = function(foundData) {
+        // Tell the graph to redraw itself with the new data
+        graph.setData(foundData);
+    };
+
+    var redrawGrid = function(foundData) {
+        // Recreate the Grid with the updated data
+        $('.grid-data').remove();
+
+        $('#grid').append("<ul class=grid-data>");
+        for (var el in foundData) {
+            $('ul.grid-data').append("<li>"
+                + foundData[el].created_at
+                + " " + foundData[el].property_1
+                + " " + foundData[el].property_2
+                + "</li>")
+        }
+
+    };
+
+    var redraw = function() {
         var start_date  = $('#start_date').val();
         var end_date    = $('#end_date').val();
         var event_name  = $('#event_names').val();
@@ -49,8 +69,8 @@ $(document).ready(function() {
 
         for (i = 0; i < chartData.length; i++) {
             if(chartData[i].event_name === event_name &&
-               chartData[i].domain_name === domain_name &&
-               dates.inRange(dates.convert(chartData[i].created_at), dates.convert(start_date), dates.convert(end_date))) {
+                chartData[i].domain_name === domain_name &&
+                dates.inRange(dates.convert(chartData[i].created_at), dates.convert(start_date), dates.convert(end_date))) {
                 foundData.push({
                     "created_at": chartData[i].created_at,
                     "property_1": chartData[i].property_1,
@@ -58,16 +78,14 @@ $(document).ready(function() {
                 });
             }
         }
-        // Tell the graph to redraw itself with the new
-        graph.setData(foundData);
+
+        redrawChart(foundData);
+        redrawGrid(foundData);
     };
 
     // Set up event handlers for the search fields
-    $('#start_date').on("change", function() {redrawChart()});
-    $('#end_date').on("change", function() {redrawChart()});
-    $('#event_names').on("change", function() {redrawChart()});
-    $('#domain_names').on("change", function() {redrawChart()});
-
-
-//    redrawChart(dates.convert("2014-05-30"), dates.convert("2014-06-30"), "click", "www.bloogle.com");
+    $('#start_date').on("change", function() {redraw()});
+    $('#end_date').on("change", function() {redraw()});
+    $('#event_names').on("change", function() {redraw()});
+    $('#domain_names').on("change", function() {redraw()});
 });
