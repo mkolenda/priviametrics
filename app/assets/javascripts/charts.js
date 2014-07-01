@@ -1,12 +1,4 @@
 $(document).ready(function() {
-    // Draw vertical lines every seven days
-    var event_lines=[];
-    for(var key in $('#chart').data('events')) {
-        if (key % 7 === 0) {
-            event_lines.push($('#chart').data('events')[key].created_at);
-        }
-    };
-
     // Make the date fields datepickers and set their default values
     $("#start_date").datepicker();
     $("#end_date").datepicker();
@@ -39,9 +31,7 @@ $(document).ready(function() {
                 var curr_year = d.getFullYear();
                 return (curr_month + "-" + curr_date + "-" + curr_year)
             },
-            xLabelAngle: 45,
-            events: event_lines,
-            eventStrokeWidth: 1
+            xLabelAngle: 45
         });
     };
 
