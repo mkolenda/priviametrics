@@ -12,7 +12,7 @@ var priviametrics = (function () {
 
     function _send_data() {
         _pm_request = new XMLHttpRequest();
-        _pm_request.open("POST", "http://localhost:3000/events.json", true);
+        _pm_request.open("POST", "http://priviametrics.herokuapp.com/events.json", true);
         _pm_request.setRequestHeader('Content-Type', 'application/json');
         _pm_request.onreadystatechange = function () {
             // don't do anything here, we don't want to interfere with the behavior of the host site

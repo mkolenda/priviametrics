@@ -12,7 +12,7 @@ For example
 
 ```html
 <head>
-   <script src="//priviametrics.herokuapp.com/public/assets/priviametrics.js"></script>
+   <script src="//priviametrics.herokuapp.com/assets/priviametrics.js"></script>
    ...other tags...
 </head>
 ```
