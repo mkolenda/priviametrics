@@ -13,39 +13,36 @@ $(document).ready(function() {
     $("#start_date").datepicker('setDate', '-30');
     $("#end_date").datepicker('setDate', '0');
 
-    // Set the initial dates
-
-
-    // Set up the graph
-    var graph = new Morris.Line({
-        // ID of the element in which to draw the chart.
-        element: 'chart',
-        // Chart data records -- each entry in this array corresponds to a point on
-        // the chart.
-        data: $('#chart').data('events'),
-        // The name of the data record attribute that contains x-values.
-        xkey: 'created_at',
-        // A list of names of data record attributes that contain y-values.
-        ykeys: ['property_1', 'property_2'],
-        // Labels for the ykeys -- will be displayed when you hover over the
-        // chart.
-        labels: ['property 1', 'property 2'],
-        xLabelFormat: function(d) {
-            var curr_date = d.getDate();
-            var curr_month = d.getMonth() + 1;
-            var curr_year = d.getFullYear();
-            return (curr_month + "-" + curr_date + "-" + curr_year)
-        },
-        xLabelAngle: 45,
-        events: event_lines,
-        eventStrokeWidth: 1
-    });
-
     //
     // Select the data matching from the chart-data div and apply it to the chart itself
     var redrawChart = function(foundData) {
-        // Tell the graph to redraw itself with the new data
-        graph.setData(foundData);
+        $('#chart').remove();
+        $('#chart-container').append('<div id=chart>');
+
+        // Set up the chart
+        var chart = new Morris.Line({
+            // ID of the element in which to draw the chart.
+            element: 'chart',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: foundData,
+            // The name of the data record attribute that contains x-values.
+            xkey: 'created_at',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['property_1', 'property_2'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['property 1', 'property 2'],
+            xLabelFormat: function(d) {
+                var curr_date = d.getDate();
+                var curr_month = d.getMonth() + 1;
+                var curr_year = d.getFullYear();
+                return (curr_month + "-" + curr_date + "-" + curr_year)
+            },
+            xLabelAngle: 45,
+            events: event_lines,
+            eventStrokeWidth: 1
+        });
     };
 
     var redrawGrid = function(foundData) {

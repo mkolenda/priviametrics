@@ -13,5 +13,8 @@
 <%= text_field "start_date", "end_date", id: "end_date"%>
 
 <%= content_tag :div, '', id: 'chart-data', data: {events: events_chart_data} %>
-<div id="chart"></div>
+<div id="chart-container">
+    <div id="chart"></div>
+</div>
 <div id="grid"></div>
+
