@@ -1,15 +1,17 @@
+<% provide(:title, "Visualize Your Data") %>
+<% provide(:title_text, "Use this page to view your site's performance.  Choose a site, a named metric and a date range to search.  The chart and grid will automatically refresh with the data you requested!") %>
+<% provide(:helper_text, "Select a site, an event and a date range") %>
+
 <% content_for :javascript_includes do %>
     <%= javascript_include_tag "charts.js" %>
 <% end %>
 
-<b>Chart</b>
-<div id="container">
-    <%= select_tag "domain_names", options_from_collection_for_select(@domains, "name", "name") %>
-    <%= select_tag "event_names", options_for_select(@event_names) %>
-    <%= text_field "start_date", "start_date", id: "start_date"%>
-    <%= text_field "start_date", "end_date", id: "end_date"%>
 
-    <%= content_tag :div, '', id: 'chart-data', data: {events: events_chart_data} %>
-    <div id="chart"></div>
-    <div id="grid"></div>
-</div>
+<%= select_tag "domain_names", options_from_collection_for_select(@domains, "name", "name") %>
+<%= select_tag "event_names", options_for_select(@event_names) %>
+<%= text_field "start_date", "start_date", id: "start_date"%>
+<%= text_field "start_date", "end_date", id: "end_date"%>
+
+<%= content_tag :div, '', id: 'chart-data', data: {events: events_chart_data} %>
+<div id="chart"></div>
+<div id="grid"></div>

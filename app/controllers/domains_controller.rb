@@ -18,7 +18,7 @@ class DomainsController < ApplicationController
     @domain.user_ids = params[:domain] ? params[:domain][:user_ids] : nil
     @domain.save
     if @domain.valid?
-      flash[:notice] = "Updated #{@domain.name}'s users to #{@domain.user_domains.map {|ud| ud.user.email}.join(', ')}"
+      flash[:success] = "Updated #{@domain.name}'s users to #{@domain.user_domains.map {|ud| ud.user.email}.join(', ')}"
       redirect_to action: 'index'
     else
       render 'edit'
@@ -43,7 +43,10 @@ class DomainsController < ApplicationController
 
   protected
     def is_admin?
-      redirect_to root_path unless current_user.admin?
+      unless current_user.admin?
+        flash[:danger] = "You must be an administrator to access the Domains feature."
+        redirect_to root_path
+      end
     end
 
     def domain_params

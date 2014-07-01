@@ -1,8 +1,19 @@
+<% provide(:title, "Associate a Domain with Users Here") %>
+<% provide(:title_text, "On this page you can associate users with the domain you selected on the previous page: #{ @domain.name }") %>
+<% provide(:helper_text, "Available Users") %>
+
+
 <%= form_for(@domain) do |f| %>
+    <ul class="list-group">
     <% for user in User.order(:email) %>
+        <li class="list-group-item">
         <%= check_box_tag "domain[user_ids][]", user.id,
                           @domain.users.include?(user), {:id => "domain_user_#{user.id}"} %>
         <%= user.email %>
+        </li>
     <% end %>
+    </ul>
     <%= f.submit 'Submit' %>
+
 <% end %>
+

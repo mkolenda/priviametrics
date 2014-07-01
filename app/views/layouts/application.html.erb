@@ -8,19 +8,48 @@
 
 </head>
 <body>
-    <div id="alerts">
+    <nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= link_to 'Priviametrics', root_path, class: 'navbar-brand' %>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="nav navbar-nav">
+            <li><%=  link_to 'Charts', charts_path %></li>
+            <li><%=  link_to 'Domains', domains_path %></li>
+          </ul>
+          <ul class="nav navbar-nav pull-right">
+            <li>
+            <% if user_signed_in? %>
+                <%= link_to "Hello #{current_user.email} Not you? Logout", destroy_user_session_path, method: :delete %>
+            <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="jumbotron">
+        <h1><%= yield :title %></h1>
+        <p><%= yield :title_text %></p>
+      </div>
+
+      <h2><%=yield :helper_text %></h2>
+
+      <div id="alerts">
         <% flash.each do |key, value| %>
             <%= content_tag(:div, value, class: "alert alert-#{key}") %>
         <% end %>
+      </div>
+      <%= yield %>
     </div>
-
-    <div id="user_info">
-      <% if user_signed_in? %>
-        <span>Hello <%= current_user.email %> Not you? <%= link_to "Logout", destroy_user_session_path, method: :delete %></span>
-      <% else %>
-      <% end %>
-    </div>
-
-    <%= yield %>
 </body>
 </html>

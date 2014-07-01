@@ -1,3 +1,12 @@
+<% provide(:title, "Manage Domains Here") %>
+<% provide(:title_text, "Create new domains or associate users with existing ones.  Once a user is associated with a domain they will see that domain's data on their Chart page.") %>
+<% provide(:helper_text, "Enter the name of the new domain below") %>
+
+<%= form_for(@domain, remote: true) do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit %>
+<% end %>
+
 <table id="domains" class="table table-condensed table-striped table-hover sites">
   <thead>
   <tr>
@@ -21,8 +30,4 @@
   </tbody>
 </table>
 
-<%= form_for(@domain, remote: true) do |f| %>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-    <%= f.submit %>
-<% end %>
+

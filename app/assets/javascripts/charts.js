@@ -45,17 +45,27 @@ $(document).ready(function() {
 
     var redrawGrid = function(foundData) {
         // Recreate the Grid with the updated data
-        $('.grid-data').remove();
+        $('#gridTable').remove();
 
-        $('#grid').append("<ul class=grid-data>");
+//        $('#grid').append("<ul class='list-group grid-data'>");
+//        for (var el in foundData) {
+//            $('.grid-data').append("<li class=list-group-item>"
+//                + foundData[el].created_at
+//                + " " + foundData[el].property_1
+//                + " " + foundData[el].property_2
+//                + "</li>")
+//        }
+
+
+        // $('#myTable > tbody:last').append
+        $('#grid').append("<table class='table table-striped' id='gridTable'>");
+        $('#gridTable').append("<tr><th>Date</th><th>Property 1</th><th>Property 2</th></tr>");
         for (var el in foundData) {
-            $('ul.grid-data').append("<li>"
-                + foundData[el].created_at
-                + " " + foundData[el].property_1
-                + " " + foundData[el].property_2
-                + "</li>")
+            $('#gridTable').append("<tr>" +
+                "<td>" + foundData[el].created_at + "</td>" +
+                "<td>" + foundData[el].property_1 + "</td>" +
+                "<td>" + foundData[el].property_2 + "</td>" + "</tr>")
         }
-
     };
 
     var redraw = function() {
@@ -81,11 +91,17 @@ $(document).ready(function() {
 
         redrawChart(foundData);
         redrawGrid(foundData);
+        // clear out the alerts div - don't want messages to be there longer than they need to be
+        $('.alert').remove();
     };
+
 
     // Set up event handlers for the search fields
     $('#start_date').on("change", function() {redraw()});
     $('#end_date').on("change", function() {redraw()});
     $('#event_names').on("change", function() {redraw()});
     $('#domain_names').on("change", function() {redraw()});
+
+
+
 });
