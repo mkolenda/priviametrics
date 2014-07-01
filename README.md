@@ -78,3 +78,10 @@ $(document).ready(function() {
     });
 });
 ```
+See your data at http://priviametrics.herokuapp.com.
+
+Log in with the administrator user: admin@test.com.  
+Or use the standard user user@test.com.  Both have the same password: 'password'
+
+Enjoy!
+

@@ -18,7 +18,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    puts request.env["HTTP_REFERER"]
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save

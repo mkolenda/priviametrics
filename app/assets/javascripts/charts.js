@@ -7,9 +7,14 @@ $(document).ready(function() {
         }
     };
 
-    // Make the date fields datepickers
+    // Make the date fields datepickers and set their default values
     $("#start_date").datepicker();
     $("#end_date").datepicker();
+    $("#start_date").datepicker('setDate', '-30');
+    $("#end_date").datepicker('setDate', '0');
+
+    // Set the initial dates
+
 
     // Set up the graph
     var graph = new Morris.Line({
@@ -46,18 +51,6 @@ $(document).ready(function() {
     var redrawGrid = function(foundData) {
         // Recreate the Grid with the updated data
         $('#gridTable').remove();
-
-//        $('#grid').append("<ul class='list-group grid-data'>");
-//        for (var el in foundData) {
-//            $('.grid-data').append("<li class=list-group-item>"
-//                + foundData[el].created_at
-//                + " " + foundData[el].property_1
-//                + " " + foundData[el].property_2
-//                + "</li>")
-//        }
-
-
-        // $('#myTable > tbody:last').append
         $('#grid').append("<table class='table table-striped' id='gridTable'>");
         $('#gridTable').append("<tr><th>Date</th><th>Property 1</th><th>Property 2</th></tr>");
         for (var el in foundData) {
@@ -91,10 +84,7 @@ $(document).ready(function() {
 
         redrawChart(foundData);
         redrawGrid(foundData);
-        // clear out the alerts div - don't want messages to be there longer than they need to be
-        $('.alert').remove();
     };
-
 
     // Set up event handlers for the search fields
     $('#start_date').on("change", function() {redraw()});
@@ -102,6 +92,6 @@ $(document).ready(function() {
     $('#event_names').on("change", function() {redraw()});
     $('#domain_names').on("change", function() {redraw()});
 
-
-
+    // Draw the grid and chart when the page loads
+    redraw();
 });
